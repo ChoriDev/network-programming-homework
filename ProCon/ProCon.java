@@ -11,6 +11,8 @@ public class ProCon {
 		Thread conTh1 = new Consumer(que, 1);
 		Thread conTh2 = new Consumer(que, 2);
 		Thread conTh3 = new Consumer(que, 3);
+		// 소비자 스레드3의 우선 순위를 10으로 설정
+		conTh3.setPriority(Thread.MAX_PRIORITY);
 		proTh.start();
 		conTh1.start();
 		conTh2.start();
