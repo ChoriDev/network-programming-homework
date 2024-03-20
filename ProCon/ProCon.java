@@ -28,9 +28,8 @@ class Producer extends Thread {
 	}
 
 	public void run() {
-		int item; // 상품
-		for (int i = 0; i < 100; i++) { // 상품 100개 생산
-			item = i;
+		int item = 0; // 상품
+		while (true) { // 상품을 무한히 생산
 			synchronized (q) {
 				q.offer(item); // 상품을 큐에 삽입
 				System.out.println("생산 : " + item);
@@ -40,6 +39,7 @@ class Producer extends Thread {
 				Thread.sleep((int) (Math.random() * 10));
 			} catch (InterruptedException e) {
 			}
+			item++;
 		}
 	}
 }
