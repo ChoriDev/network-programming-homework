@@ -17,12 +17,15 @@ public class ProCon {
 		conTh2.start();
 		conTh3.start();
 		try {
-			proTh.join();
-			conTh1.interrupt();
-			conTh2.interrupt();
-			conTh3.interrupt();
+			// 3초 동안 block
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 		}
+		// 모든 스레드를 종료시킴
+		proTh.interrupt();
+		conTh1.interrupt();
+		conTh2.interrupt();
+		conTh3.interrupt();
 		System.out.println(" 생산자 소비자 패턴 종료 ");
 	}
 }
@@ -37,7 +40,7 @@ class Producer extends Thread {
 
 	public void run() {
 		int item = 0; // 상품
-		while (true) { // 상품을 무한히 생산
+		while (!Thread.currentThread().isInterrupted()) { // 상품을 무한히 생산
 			synchronized (q) {
 				q.offer(item); // 상품을 큐에 삽입
 				System.out.println("생산 : " + item);
@@ -46,6 +49,8 @@ class Producer extends Thread {
 			try {
 				Thread.sleep((int) (Math.random() * 10));
 			} catch (InterruptedException e) {
+				// interrupt를 받으면 다시 스스로를 interrupt
+				Thread.currentThread().interrupt();
 			}
 			item++;
 		}
@@ -73,6 +78,7 @@ class Consumer extends Thread {
 						q.wait(); // 대기
 					} catch (InterruptedException e) {
 						System.out.println("\t 총 소비 개수 : " + totalItem);
+						// interrupt를 받으면 다시 스스로를 interrupt
 						Thread.currentThread().interrupt();
 					}
 				} else {
