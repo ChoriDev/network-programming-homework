@@ -3,7 +3,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ProConEx {
+public class ProCon {
 	public static void main(String args[]) {
 		Queue<Integer> que = new LinkedList<Integer>();
 		Thread proTh = new Producer(que);
