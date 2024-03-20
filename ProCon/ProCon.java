@@ -7,7 +7,6 @@ public class ProCon {
 	public static void main(String args[]) {
 		Queue<Integer> que = new LinkedList<Integer>();
 		Thread proTh = new Producer(que);
-
 		// 소비자 스레드를 3개 생성
 		Thread conTh1 = new Consumer(que, 1);
 		Thread conTh2 = new Consumer(que, 2);
@@ -77,7 +76,7 @@ class Consumer extends Thread {
 						System.out.println("\t 소비자" + number + " 대기");
 						q.wait(); // 대기
 					} catch (InterruptedException e) {
-						System.out.println("\t 총 소비 개수 : " + totalItem);
+						System.out.println("\t 소비자 " + number + "의 총 소비 개수 : " + totalItem);
 						// interrupt를 받으면 다시 스스로를 interrupt
 						Thread.currentThread().interrupt();
 					}
