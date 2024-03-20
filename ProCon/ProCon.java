@@ -7,12 +7,20 @@ public class ProCon {
 	public static void main(String args[]) {
 		Queue<Integer> que = new LinkedList<Integer>();
 		Thread proTh = new Producer(que);
-		Thread conTh = new Consumer(que, 1);
+
+		// 소비자 스레드를 3개 생성
+		Thread conTh1 = new Consumer(que, 1);
+		Thread conTh2 = new Consumer(que, 2);
+		Thread conTh3 = new Consumer(que, 3);
 		proTh.start();
-		conTh.start();
+		conTh1.start();
+		conTh2.start();
+		conTh3.start();
 		try {
 			proTh.join();
-			conTh.interrupt();
+			conTh1.interrupt();
+			conTh2.interrupt();
+			conTh3.interrupt();
 		} catch (InterruptedException e) {
 		}
 		System.out.println(" 생산자 소비자 패턴 종료 ");
