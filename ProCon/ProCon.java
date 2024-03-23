@@ -39,6 +39,7 @@ class Producer extends Thread {
 		this.q = q;
 	}
 
+	@Override
 	public void run() {
 		int item = 0; // 상품
 		while (!Thread.currentThread().isInterrupted()) { // 상품을 무한히 생산
@@ -68,6 +69,7 @@ class Consumer extends Thread {
 		number = i;
 	}
 
+	@Override
 	public void run() {
 		int item; // 상품
 		int totalItem = 0; // 내가 소비한 총 상품 개수
