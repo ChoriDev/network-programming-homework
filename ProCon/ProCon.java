@@ -80,6 +80,8 @@ class Consumer extends Thread {
 						System.out.println("\t 소비자" + number + " 대기");
 						q.wait(); // 대기
 					} catch (InterruptedException e) {
+						// 각 소비자 스레드는 자신의 총 소비 개수를 표시
+						// 각 소비자 스레드는 자신의 스레드 우선 순위를 표시
 						System.out.println("\t 소비자 " + number
 								+ "의 총 소비 개수 : " + totalItem
 								+ ", 스레드 우선 순위 : " + Thread.currentThread().getPriority());
